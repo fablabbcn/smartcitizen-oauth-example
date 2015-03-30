@@ -6,24 +6,31 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 </head>
 <body>
+
+<div id="info"></div>
+
 <script type="text/javascript">
 
-  var jso = new JSO({
-    providerID: "smartcitizen",
-    client_id: "d2a585d071c3c667aba2f7f77036414f396b9f3be278a93c0b8a5a7078c18e5a",
-    authorization: "https://id.smartcitizen.me/oauth/authorize",
-    redirect_uri: "https://example.smartcitizen.me"
-  });
+  $(document).ready(function() {
 
-  jso.callback();
+    var jso = new JSO({
+      providerID: "smartcitizen",
+      client_id: "d2a585d071c3c667aba2f7f77036414f396b9f3be278a93c0b8a5a7078c18e5a",
+      authorization: "https://id.smartcitizen.me/oauth/authorize",
+      redirect_uri: "https://example.smartcitizen.me"
+    });
 
-  JSO.enablejQuery($);
-  jso.ajax({
-    url: "https://new-api.smartcitizen.me/v0/me",
-    dataType: 'json',
-    success: function(data) {
-      document.write(JSON.stringify(data));
-    }
+    jso.callback();
+
+    JSO.enablejQuery($);
+    jso.ajax({
+      url: "https://new-api.smartcitizen.me/v0/me",
+      dataType: 'json',
+      success: function(data) {
+       $('#info').html(JSON.stringify(data));
+      }
+    });
+
   });
 
 </script>
