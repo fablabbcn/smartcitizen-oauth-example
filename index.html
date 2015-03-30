@@ -25,24 +25,24 @@
 
     jso.callback();
 
-    function doAjax() {
-      jso.ajax({
-        url: "https://new-api.smartcitizen.me/v0/me",
-        dataType: 'json',
-        success: function(data) {
-         $('#info').html(JSON.stringify(data));
-        }
-      });
-    }
+    // function doAjax() {
+    //   jso.ajax({
+    //     url: "https://new-api.smartcitizen.me/v0/me",
+    //     dataType: 'json',
+    //     success: function(data) {
+    //      $('#info').html(JSON.stringify(data));
+    //     }
+    //   });
+    // }
 
-    if (JSO.instances.smartcitizen) {
-      $('#login-button').hide();
-      doAjax();
-    } else {
-      $('#login-button').click(function() {
-        doAjax();
-      });
-    }
+    // if (JSO.instances.smartcitizen) {
+    //   $('#login-button').hide();
+    //   doAjax();
+    // } else {
+    //   $('#login-button').click(function() {
+    //     doAjax();
+    //   });
+    // }
 
   });
 
