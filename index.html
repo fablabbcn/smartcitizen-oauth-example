@@ -7,7 +7,9 @@
 </head>
 <body>
 
-<div id="info"></div>
+<div id="info">
+  <input type="button" value="Login" id="login" />
+</div>
 
 <script type="text/javascript">
 
@@ -15,12 +17,15 @@
 
     JSO.enablejQuery($);
 
+    $('#login').click(function() {
+      alert('login');
+    });
+
     var jso = new JSO({
       providerID: "smartcitizen",
       client_id: "d2a585d071c3c667aba2f7f77036414f396b9f3be278a93c0b8a5a7078c18e5a",
       authorization: "https://id.smartcitizen.me/oauth/authorize",
-      redirect_uri: "http://example.smartcitizen.me",
-      debug: true
+      redirect_uri: "http://example.smartcitizen.me"
     });
 
     jso.callback();
