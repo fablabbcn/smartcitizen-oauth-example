@@ -488,7 +488,7 @@ define('utils',['require','exports','module'],function(require, exports, module)
 	 * Utility: scopeList(scopes )
 	 * Takes a list of scopes that might be overlapping, and removed duplicates,
 	 * then concatenates the list by spaces and returns a string.
-	 * 
+	 *
 	 * @param  {[type]} scopes [description]
 	 * @return {[type]}        [description]
 	 */
@@ -536,11 +536,11 @@ define('utils',['require','exports','module'],function(require, exports, module)
 
 		// console.log("LOG(), Arguments", arguments, msg)
 		if (arguments.length > 1) {
-			console.log(arguments);	
+			console.log(arguments);
 		} else {
 			console.log(msg);
 		}
-		
+
 	};
 
 	/**
@@ -557,7 +557,7 @@ define('utils',['require','exports','module'],function(require, exports, module)
 	// }
 
 
-	/* 
+	/*
 	 * Takes an URL as input and a params object.
 	 * Each property in the params is added to the url as query string parameters
 	 */
@@ -605,7 +605,7 @@ define('store',['require','exports','module','./utils'],function(require, export
 	store.saveState = function (state, obj) {
 		localStorage.setItem("state-" + state, JSON.stringify(obj));
 	};
-	
+
 	/**
 	 * getStage()  returns the state object, but also removes it.
 	 * @type {Object}
@@ -629,11 +629,11 @@ define('store',['require','exports','module','./utils'],function(require, export
 
 		// console.log("LOG(), Arguments", arguments, msg)
 		if (arguments.length > 1) {
-			console.log(arguments);	
+			console.log(arguments);
 		} else {
 			console.log(msg);
 		}
-		
+
 	};
 
 
@@ -655,7 +655,7 @@ define('store',['require','exports','module','./utils'],function(require, export
 	 * are expired, and the ones that do not meet a scopes requirement.
 	 */
 	store.filterTokens = function(tokens, scopes) {
-		var i, j, 
+		var i, j,
 			result = [],
 			now = utils.epoch(),
 			usethis;
@@ -776,7 +776,7 @@ define('Config',[],function() {
 		var splittedKeys = key.split('.');
 		var i = 0;
 
-		// console.log("splittedKeys", splittedKeys); 
+		// console.log("splittedKeys", splittedKeys);
 
 		for(i = 0; i < splittedKeys.length; i++) {
 
@@ -805,14 +805,14 @@ define('Config',[],function() {
  * 	Version 2.0
  *  UNINETT AS - http://uninett.no
  *  Author: Andreas Åkre Solberg <andreas.solberg@uninett.no>
- *  Licence: 
- *   	
+ *  Licence:
+ *
  *  Documentation available at: https://github.com/andreassolberg/jso
  */
 
 define('jso',['require','exports','module','./store','./utils','./Config'],function(require, exports, module) {
 
-	var 
+	var
 		default_config = {
 			"lifetime": 3600,
 			"debug": true,
@@ -878,15 +878,15 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 		                setTimeout(function() {
 		                	ref.close();
 		                }, 500);
-		                
+
 
 			            that.callback(url, function() {
 			                // When we've found OAuth credentials, we close the inappbrowser...
 			                utils.log("Closing window ", ref);
 			                if (typeof callback === 'function') callback();
-			            });	            	
+			            });
 		            }
-		            
+
 		        };
 		    };
 
@@ -902,10 +902,10 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 			utils.log("URL Loaded... ");
 	        ref.addEventListener('loadstart', onNewURLinspector(ref));
 	        utils.log("Event listeren ardded... ", ref);
-	        
+
 
 	        // Everytime the Phonegap InAppBrowsers moves to a new URL,
-	        
+
 
 
 		};
@@ -945,7 +945,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	 * @param {[type]} url [description]
 	 */
 	JSO.prototype.URLcontainsToken = function(url) {
-		// If a url is provided 
+		// If a url is provided
 		if (url) {
 			// utils.log('Hah, I got the url and it ' + url);
 			if(url.indexOf('#') === -1) return false;
@@ -962,7 +962,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	};
 
 	/**
-	 * Check if the hash contains an access token. 
+	 * Check if the hash contains an access token.
 	 * And if it do, extract the state, compare with
 	 * config, and store the access token for later use.
 	 *
@@ -971,7 +971,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	 * instead the response is received on a child browser.
 	 */
 	JSO.prototype.callback = function(url, callback, providerID) {
-		var 
+		var
 			atoken,
 			h = window.location.hash,
 			now = utils.epoch(),
@@ -980,7 +980,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 		utils.log("JSO.prototype.callback() " + url + " callback=" + typeof callback);
 
-		// If a url is provided 
+		// If a url is provided
 		if (url) {
 			// utils.log('Hah, I got the url and it ' + url);
 			if(url.indexOf('#') === -1) return;
@@ -991,6 +991,8 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 		/*
 		 * Start with checking if there is a token in the hash
 		 */
+
+        console.log(h);
 		if (h.length < 2) return;
 		if (h.indexOf("access_token") === -1) return;
 		h = h.substring(1);
@@ -1003,11 +1005,13 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 			state = {providerID: providerID};
 		}
 
-		
+        console.log(atoken);
+
+
 		if (!state) throw "Could not retrieve state";
 		if (!state.providerID) throw "Could not get providerid from state";
 		if (!JSO.instances[state.providerID]) throw "Could not retrieve JSO.instances for this provider.";
-		
+
 		instance = JSO.instances[state.providerID];
 
 		/**
@@ -1122,7 +1126,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 	JSO.prototype.getToken = function(callback, opts) {
 		// var scopesRequest  = this._getRequestScopes(opts);
-		
+
 		var scopesRequire = this._getRequiredScopes(opts);
 		var token = store.getToken(this.providerID, scopesRequire);
 
@@ -1136,7 +1140,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 	JSO.prototype.checkToken = function(opts) {
 		// var scopesRequest  = this._getRequestScopes(opts);
-		
+
 		var scopesRequire = this._getRequiredScopes(opts);
 		return store.getToken(this.providerID, scopesRequire);
 	};
@@ -1163,7 +1167,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 
 	JSO.prototype._authorize = function(callback, opts) {
-		var 
+		var
 			request,
 			authurl,
 			scopes;
@@ -1207,7 +1211,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 		authurl = utils.encodeURL(authorization, request);
 
-		// We'd like to cache the hash for not loosing Application state. 
+		// We'd like to cache the hash for not loosing Application state.
 		// With the implciit grant flow, the hash will be replaced with the access
 		// token when we return after authorization.
 		if (window.location.hash) {
@@ -1230,7 +1234,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	JSO.prototype.gotoAuthorizeURL = function(url, callback) {
 
 
-		if (!this.callbacks.redirect || typeof this.callbacks.redirect !== 'function') 
+		if (!this.callbacks.redirect || typeof this.callbacks.redirect !== 'function')
 			throw new Error('Cannot redirect to authorization endpoint because of missing redirect handler');
 
 		this.callbacks.redirect(url, callback);
@@ -1244,7 +1248,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 	JSO.prototype.ajax = function(settings) {
 
-		var 
+		var
 			allowia,
 			scopes,
 			token,
@@ -1254,7 +1258,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 		var that = this;
 
 		if (!JSO.hasOwnProperty('$')) throw new Error("JQuery support not enabled.");
-		
+
 		oauthOptions = settings.oauth || {};
 
 		var errorOverridden = settings.error || null;
@@ -1292,14 +1296,14 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 			return JSO.$.ajax(settings);
 
 		}, oauthOptions);
-		
+
 	};
 
 
 
 
 
-	/* 
+	/*
 	 * Redirects the user to a specific URL
 	 */
 	// api_redirect = function(url) {
@@ -1344,13 +1348,13 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 	// 		var def = exp.jso_findDefaultEntry(c);
 	// 		utils.log("jso_configure() about to check for token for this entry", def);
-	// 		exp.jso_checkfortoken(def);	
+	// 		exp.jso_checkfortoken(def);
 
 	// 	} catch(e) {
 	// 		utils.log("Error when retrieving token from hash: " + e, c, opts);
 	// 		window.location.hash = "";
 	// 	}
-		
+
 	// }
 
 	// exp.jso_dump = function() {
@@ -1398,13 +1402,13 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	// if (typeof $ === 'undefined') return;
 
 	// $.oajax = function(settings) {
-	// 	var 
+	// 	var
 	// 		allowia,
 	// 		scopes,
 	// 		token,
 	// 		providerid,
 	// 		co;
-		
+
 	// 	providerid = settings.jso_provider;
 	// 	allowia = settings.jso_allowia || false;
 	// 	scopes = settings.jso_scopes;
@@ -1420,7 +1424,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	// 	var performAjax = function() {
 	// 		// utils.log("Perform ajax!");
 
-	// 		if (!token) throw "Could not perform AJAX call because no valid tokens was found.";	
+	// 		if (!token) throw "Could not perform AJAX call because no valid tokens was found.";
 
 	// 		if (co["presenttoken"] && co["presenttoken"] === "qs") {
 	// 			// settings.url += ((h.indexOf("?") === -1) ? '?' : '&') + "access_token=" + encodeURIComponent(token["access_token"]);
@@ -1461,7 +1465,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 	// 			});
 	// 			return;
 	// 		} else {
-	// 			throw "Could not perform AJAX call because no valid tokens was found.";	
+	// 			throw "Could not perform AJAX call because no valid tokens was found.";
 	// 		}
 	// 	}
 
