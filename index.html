@@ -22,12 +22,11 @@
       redirect_uri: "https://example.smartcitizen.me"
     });
 
-    // jso.callback();
+    jso.callback();
 
-    jso.getToken(function(token) {
-      console.log("I got the token: ", token);
-      jso.callback();
-    });
+    // jso.getToken(function(token) {
+    //   console.log("I got the token: ", token);
+    // });
 
     jso.ajax({
       url: "https://new-api.smartcitizen.me/v0/me",
