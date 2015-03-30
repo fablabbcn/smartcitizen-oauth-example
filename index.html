@@ -13,18 +13,16 @@
 
   $(document).ready(function() {
 
+    JSO.enablejQuery($);
+
     var jso = new JSO({
       providerID: "smartcitizen",
       client_id: "d2a585d071c3c667aba2f7f77036414f396b9f3be278a93c0b8a5a7078c18e5a",
       authorization: "https://id.smartcitizen.me/oauth/authorize",
-      redirect_uri: "https://example.smartcitizen.me",
-      debug: true,
-      isDefault: true
+      redirect_uri: "https://example.smartcitizen.me"
     });
 
     jso.callback();
-
-    JSO.enablejQuery($);
 
     // jso.getToken(function(token) {
     //   console.log("I got the token: ", token);
