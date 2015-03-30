@@ -998,14 +998,19 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 		h = h.substring(1);
 		atoken = utils.parseQueryString(h);
 
+        console.log(atoken);
 		if (atoken.state) {
+            console.log('a');
+            console.log(atoken.state);
 			state = store.getState(atoken.state);
 		} else {
+            console.log('b');
+            console.log(providerID);
 			if (!providerID) {throw "Could not get [state] and no default providerid is provided.";}
 			state = {providerID: providerID};
 		}
 
-        console.log(atoken);
+
 
 
 		if (!state) throw "Could not retrieve state";
