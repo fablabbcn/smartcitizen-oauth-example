@@ -7,19 +7,14 @@
 </head>
 <body>
 
-<div id="info">
-  <input type="button" value="Login" id="login" />
-</div>
+<div id="info"></div>
+<input type="button" value="Login" id="login-button" />
 
 <script type="text/javascript">
 
   $(document).ready(function() {
 
     JSO.enablejQuery($);
-
-    $('#login').click(function() {
-      alert('login');
-    });
 
     var jso = new JSO({
       providerID: "smartcitizen",
@@ -30,13 +25,24 @@
 
     jso.callback();
 
-    jso.ajax({
-      url: "https://new-api.smartcitizen.me/v0/me",
-      dataType: 'json',
-      success: function(data) {
-       $('#info').html(JSON.stringify(data));
-      }
-    });
+    function doAjax() {
+      jso.ajax({
+        url: "https://new-api.smartcitizen.me/v0/me",
+        dataType: 'json',
+        success: function(data) {
+         $('#info').html(JSON.stringify(data));
+        }
+      });
+    }
+
+    if (JSO.instances.smartcitizen) {
+      $('#login-button').hide();
+      doAjax();
+    } else {
+      $('#login-button').click(function() {
+        doAjax();
+      });
+    }
 
   });
 
