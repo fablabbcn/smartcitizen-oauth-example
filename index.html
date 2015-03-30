@@ -3,7 +3,10 @@
 <head>
   <title>OAuth 2.0 Example</title>
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script type="text/javascript" src="jso.js"></script>
+  <script type="text/javascript">
+  var cachebuster = Math.round(new Date().getTime() / 1000);
+  document.write('<script type="text/javascript" src="jso2.js?cb=' +cachebuster+'"></script>');
+  </script>
 </head>
 <body>
 
