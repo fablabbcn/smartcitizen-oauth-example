@@ -8,7 +8,7 @@
 <body>
 
 <div id="info"></div>
-<input type="button" value="Login" id="login-button" />
+<!-- <input type="button" value="Login" id="login-button" /> -->
 
 <script type="text/javascript">
 
@@ -22,27 +22,15 @@
       authorization: "https://id.smartcitizen.me/oauth/authorize",
       redirect_uri: "http://example.smartcitizen.me"
     });
-
     jso.callback();
 
-    // function doAjax() {
-    //   jso.ajax({
-    //     url: "https://new-api.smartcitizen.me/v0/me",
-    //     dataType: 'json',
-    //     success: function(data) {
-    //      $('#info').html(JSON.stringify(data));
-    //     }
-    //   });
-    // }
-
-    // if (JSO.instances.smartcitizen) {
-    //   $('#login-button').hide();
-    //   doAjax();
-    // } else {
-    //   $('#login-button').click(function() {
-    //     doAjax();
-    //   });
-    // }
+    jso.ajax({
+      url: "https://new-api.smartcitizen.me/v0/me",
+      dataType: 'json',
+      success: function(data) {
+       $('#info').html(JSON.stringify(data));
+      }
+    });
 
   });
 
