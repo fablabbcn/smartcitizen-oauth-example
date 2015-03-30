@@ -1002,6 +1002,7 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 		if (atoken.state) {
             console.log('a');
             console.log(atoken.state);
+            console.log(store.getState(atoken.state));
 			state = store.getState(atoken.state);
 		} else {
             console.log('b');
