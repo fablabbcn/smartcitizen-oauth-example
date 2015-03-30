@@ -992,21 +992,14 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 		 * Start with checking if there is a token in the hash
 		 */
 
-        console.log(h);
 		if (h.length < 2) return;
 		if (h.indexOf("access_token") === -1) return;
 		h = h.substring(1);
 		atoken = utils.parseQueryString(h);
 
-        console.log(atoken);
 		if (atoken.state) {
-            console.log('a');
-            console.log(atoken.state);
-            console.log(store.getState(atoken.state));
 			state = store.getState(atoken.state);
 		} else {
-            console.log('b');
-            console.log(providerID);
 			if (!providerID) {throw "Could not get [state] and no default providerid is provided.";}
 			state = {providerID: providerID};
 		}
