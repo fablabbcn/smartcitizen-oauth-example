@@ -1176,8 +1176,8 @@ define('jso',['require','exports','module','./store','./utils','./Config'],funct
 
 
         request = {
-            "response_type": "token",
-            "state": utils.uuid()
+            "response_type": "token"
+            // "state": utils.uuid()
         };
 
 
