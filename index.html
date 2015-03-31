@@ -17,15 +17,15 @@
 
     JSO.enablejQuery($);
 
-    var jso = new JSO({
+    window.jso = new JSO({
       providerID: "smartcitizen",
       client_id: "d2a585d071c3c667aba2f7f77036414f396b9f3be278a93c0b8a5a7078c18e5a",
       authorization: "https://id.smartcitizen.me/oauth/authorize",
       redirect_uri: "http://example.smartcitizen.me"
     });
-    jso.callback();
+    window.jso.callback();
 
-    jso.ajax({
+    window.jso.ajax({
       url: "https://new-api.smartcitizen.me/v0/me",
       dataType: 'json',
       success: function(data) {
@@ -35,7 +35,7 @@
 
     $('#logout-button').click(function() {
       console.log('wipetokens');
-      jso.wipeTokens();
+      window.jso.wipeTokens();
     });
 
   });
