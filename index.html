@@ -7,9 +7,8 @@
 </head>
 <body>
 
-<div id="info"></div>
-<input type="button" value="Login" id="login-button" />
-<input type="button" value="Logout" id="logout-button" />
+<div id="info" style="display: none;"><input type="button" value="Logout" id="logout-button" /></div>
+<!-- <input type="button" value="Login" id="login-button" /> -->
 
 <script type="text/javascript">
 
@@ -17,25 +16,25 @@
 
     JSO.enablejQuery($);
 
-    window.jso = new JSO({
+    var jso = new JSO({
       providerID: "smartcitizen",
       client_id: "d2a585d071c3c667aba2f7f77036414f396b9f3be278a93c0b8a5a7078c18e5a",
       authorization: "https://id.smartcitizen.me/oauth/authorize",
       redirect_uri: "http://example.smartcitizen.me"
     });
-    window.jso.callback();
+    jso.callback();
 
-    window.jso.ajax({
+    jso.ajax({
       url: "https://new-api.smartcitizen.me/v0/me",
       dataType: 'json',
       success: function(data) {
-       $('#info').html(JSON.stringify(data));
-      }
-    });
+        $('#info').show().prepend(JSON.stringify(data));
 
-    $('#logout-button').click(function() {
-      console.log('wipetokens');
-      window.jso.wipeTokens();
+        $('#logout-button').click(function() {
+          console.log('wipetokens');
+          jso.wipeTokens();
+        });
+      }
     });
 
   });
