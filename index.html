@@ -7,11 +7,7 @@
 </head>
 <body>
 
-<div id="info" style="display: none;"><input type="button" value="Logout" id="logout-button" /></div>
-<!-- <input type="button" value="Login" id="login-button" /> -->
-
 <script type="text/javascript">
-
   $(document).ready(function() {
 
     JSO.enablejQuery($);
@@ -29,16 +25,10 @@
       dataType: 'json',
       success: function(data) {
         $('#info').show().prepend(JSON.stringify(data));
-
-        $('#logout-button').click(function() {
-          console.log('wipetokens');
-          jso.wipeTokens();
-        });
       }
     });
 
   });
-
 </script>
 </body>
 </html>
